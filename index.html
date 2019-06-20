@@ -1,17 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta http-equiv="X-UA-Compatible" content="ie=edge">
-<link rel="stylesheet" href="assts/css/reset.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
-<link rel="stylesheet" href="assts/css/style.css">
-<title>Star Wars RPG</title>
-</head>
-<body>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.slim.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="assets/css/reset.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <title>Star Wars RPG</title>
+</head>
+
+<body>
+    <div class="container">
+        <h1 id="mainTitle">Star Wars RPG</h1>
+    </div>
+    <div class="container restart">
+        <div class="row">
+            <div id="characters-selection">
+                <div class="title">Pick your Character</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Both your character and the enemy -->
+    <div class="container">
+        <div class="row">
+            <div class="col-md-5" id="yourCharacter"></div>
+            <div class="col-md-2" id="fightButton"></div>
+            <div class="col-md-5" id="currentEnemy"></div>
+        </div>
+    </div>
+
+    <!-- Append remaining enemies here until -->
+    <div class="container">
+        <div class="row">
+            <div id="remainingEnemies"></div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="assets/javascript/game.js"></script>
 </body>
+
 </html>
