@@ -5,7 +5,7 @@ $(document).ready(function () {
         "Darth Sidious": {
             name: "Darth Sidious",
             health: 80,
-            attack: 5,
+            attack: 15,
             imageURL: "assets/images/darth-sidious.png",
             enemyAttackBack: 10
         },
@@ -66,5 +66,35 @@ $(document).ready(function () {
 
     // Run the initializeGame function to start game
     initializeGame();
+
+    // Function that clears the characters-selection area and render the character in the player section
+    // This function will be called on click event
+    var playerSelect = function() {
+        $(areaRender).empty();
+        renderCharacter(charObj, areaRender);
+    };
+
+    // Function that will render the remaining characters in the remainingEnemies section and add to the enemiesLeft array
+    // This function will be called after the onclick event to select player and playerSelect function
+    var renderEnemies = function(enemyArr) {
+        for (var i = 0; i < enemyArr.length; i++){
+            renderCharacter(enemyArr[i], "#remainingEnemies");
+        }
+    };
+
+    // Function to restart the game after victory or defeat
+    var restartGame = function(resultMessage) {
+        // When Restart button is clicked, reload the page
+        var restart = $("<button>Restart</button>").click(function() {
+            location.reload();
+        });
+        // Build div to display victory or defeat message
+        var gameState = $("<div>").text(resultMessage);
+
+        // Render the restart button and victory/defeat message
+        $("body").append(gameState);
+        $("body").append(restart);
+    };
+
 
 });

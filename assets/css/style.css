@@ -9,20 +9,21 @@ body {
 img {
     width: 225px;
     height: 150px;
-    /* margin: 10px; */
-    /* border-radius: 10px; */
+}
+
+#mainTitle{
+    text-align: center;
 }
 #characters {
 	width:100%;
     display: inline-block;
-    /* margin: 10px; */
 }
 
 .character {
     display:inline-block;
 	font-size: 16px;
 	text-align: center;
-    margin: 10px 0;
+    margin: 10px 10px 10px 10px;
     background-color: #ffffff;
 
 }
