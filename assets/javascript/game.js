@@ -45,6 +45,8 @@ $(document).ready(function () {
     // Variable to track number of defeated opponents
     var killCount = 0;
 
+    $("#attack-button").hide();
+
     // FUNCTIONS
     // Function to render list of characters available
     var renderCharacter = function (character, renderArea) {
@@ -93,15 +95,15 @@ $(document).ready(function () {
     // Function to restart the game after victory or defeat
     var restartGame = function (resultMessage) {
         // When Restart button is clicked, reload the page
-        var restart = $("<button>Restart</button>").click(function () {
+        var restart = $("<button type='button' class='btn btn-primary'>Restart</button>").click(function () {
             location.reload();
         });
         // Build div to display victory or defeat message
         var gameState = $("<div>").text(resultMessage);
 
         // Render the restart button and victory/defeat message
-        $("body").append(gameState);
-        $("body").append(restart);
+        $("#attack-button").append(gameState);
+        $("#attack-button").append(restart);
     };
 
     // Function to clear game message
@@ -146,7 +148,7 @@ $(document).ready(function () {
             // Remove element from the enemiesRemaining section since it will be moved to the opponent div
             $(this).remove();
             // Add attack button
-            $("#attack-button").append("<img src='assets/images/Dueling_lightsabers.png' id='lightsabers'>");
+            $("#attack-button").show();
         }
     });
 
@@ -173,12 +175,13 @@ $(document).ready(function () {
                 if (player.health <= 0) {
                     clearMessage();
                     restartGame("Game over. Try again young padwan!");
-                    $("attack-button").off("click");
+                    $("#attack-button").off("click");
                 }
             }
             else {
                 // If enemy has less than zero health, they are defeated and their card should be removed
                 $("#opponent").empty();
+                clearMessage();
                 var gameStateMessage = "You have defeated " + opponent.name + ", you can choose to fight another enemy.";
                 renderMessage(gameStateMessage);
 
@@ -188,7 +191,8 @@ $(document).ready(function () {
                 // If you call killed all opponents you win. Call the restartGame function to allow user to restart the game
                 if (killCount >= enemiesLeft.length) {
                     clearMessage();
-                    $("attack-button").off("click");
+                    $("#attack-button").off("click");
+                    $("#remainingEnemies").hide();
                     restartGame("You've done well young jedi!");
                 }
             }
