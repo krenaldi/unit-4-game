@@ -69,7 +69,7 @@ $(document).ready(function () {
 
     // Function that clears the characters-selection area and render the character in the player section
     // This function will be called on click event
-    var playerSelect = function () {
+    var playerSelect = function (charObj, areaRender) {
         $(areaRender).empty();
         renderCharacter(charObj, areaRender);
     };
