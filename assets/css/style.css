@@ -11,9 +11,13 @@ img {
     height: 150px;
 }
 
-#mainTitle{
+.mainTitle{
     text-align: center;
+    font-family: 'Anton', sans-serif;
+    font-stretch: expanded;
+    font-size: 86px;
 }
+
 #characters {
 	width:100%;
     display: inline-block;
@@ -35,3 +39,18 @@ img {
     margin-bottom: 3px;
 }
 
+#player,
+#opponent,
+#attack-button,
+#game-message {
+    align-content: center;
+    text-align: center;
+}
+
+#lightsabers{
+    padding-top: 35px;
+}
+ #attack-button {
+     font-weight: bolder;
+     color: #ffffff;
+ }
