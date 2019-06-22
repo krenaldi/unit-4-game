@@ -82,6 +82,14 @@ $(document).ready(function () {
         }
     };
 
+    // Function to render game messages
+    var renderMessage = function (message) {
+        // Builds message and appends to page
+        var gameMessageSet = $("#game-message");
+        var newMessage = $("<div>").text(message);
+        gameMessageSet.append(newMessage);
+    }
+
     // Function to restart the game after victory or defeat
     var restartGame = function (resultMessage) {
         // When Restart button is clicked, reload the page
@@ -97,10 +105,10 @@ $(document).ready(function () {
     };
 
     // Function to clear game message
-    // var clearMessage = function () {
-    //     var gameMessage = $("#game-message");
-    //     gameMessage.text("");
-    // };
+    var clearMessage = function () {
+        var gameMessage = $("#game-message");
+        gameMessage.text("");
+    };
 
     // Onclick event to trigger playerSelect function
     $("#characters-selection").on("click", ".character", function () {
@@ -113,19 +121,22 @@ $(document).ready(function () {
             player = characters[name];
             // Loop through remaining characters and push them to the enemiesLeft array
             for (var key in characters) {
-                enemiesLeft.push(characters[key]);
+                if (key !== name) {
+                    enemiesLeft.push(characters[key]);
+                }
             }
-        }
-        // Hide the character-selection div
-        $("#character-selection").hide();
+            // Hide the character-selection div
+            $("#characters-selection").hide();
 
-        // Then update the selected character and render the opponents to the remainingEnemies div
-        playerSelect(player, "#player");
-        renderEnemies(enemiesLeft);
+            // Then update the selected character and render the opponents to the remainingEnemies div
+            playerSelect(player, "#player");
+            $("#remainingEnemies").prepend("<div class='title'>Pick your Opponent</div>");
+            renderEnemies(enemiesLeft);
+        }
     });
 
     // Onclick event to select opponent
-    $("#remainingEnemies").on("click", ".character", function() {
+    $("#remainingEnemies").on("click", ".character", function () {
         // Variable to save clicked opponent's name
         var name = $(this).attr("data-name");
         // If there is no opponent, the clicked enemy will become the opponent
@@ -135,15 +146,15 @@ $(document).ready(function () {
             // Remove element from the enemiesRemaining section since it will be moved to the opponent div
             $(this).remove();
             // Add attack button
-            $("#attack-button").append("<img src='assets/images/Dueling_lightsabers.png' id='lightsabers'>"); 
+            $("#attack-button").append("<img src='assets/images/Dueling_lightsabers.png' id='lightsabers'>");
         }
     });
 
     // When attack button is clicked, the following game logic is followed
-    $("#attack-button").on("click", function() {
+    $("#attack-button").on("click", function () {
         // If there is an opponent, combat will occur
-        if ($("#opponent").children().length === 0) {
-            
+        if ($("#opponent").children().length !== 0) {
+
             // Reduce opponent's health by player's attack value which increases by multiple of turnCounter
             opponent.health -= player.attack * turnCounter;
 
@@ -159,8 +170,8 @@ $(document).ready(function () {
                 playerSelect(player, "#player");
 
                 // If player has zero or less health the game ends
-                if (player.health <= 0){
-                    // clearMessage();
+                if (player.health <= 0) {
+                    clearMessage();
                     restartGame("Game over. Try again young padwan!");
                     $("attack-button").off("click");
                 }
@@ -176,7 +187,7 @@ $(document).ready(function () {
 
                 // If you call killed all opponents you win. Call the restartGame function to allow user to restart the game
                 if (killCount >= enemiesLeft.length) {
-                    // clearMessage();
+                    clearMessage();
                     $("attack-button").off("click");
                     restartGame("You've done well young jedi!");
                 }
@@ -186,7 +197,7 @@ $(document).ready(function () {
         }
         else {
             // If there is no opponent, display an error message
-            // clearMessage();
+            clearMessage();
             renderMessage("No enemy selected!");
         }
     });
